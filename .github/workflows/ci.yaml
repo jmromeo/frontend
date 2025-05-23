@@ -23,6 +23,10 @@ jobs:
     name: Lint and check format
     runs-on: ubuntu-latest
     steps:
+      - name: Start Measurement
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4
+        with:
+          task: start-measurement
       - name: Check out files from GitHub
         uses: actions/checkout@v4.2.2
       - name: Setup Node
@@ -53,6 +57,10 @@ jobs:
         run: yarn run lint:lit --quiet
       - name: Run prettier
         run: yarn run lint:prettier
+      - name: Show Energy Results
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        with:
+          task: display-results
   test:
     name: Run tests
     runs-on: ubuntu-latest
